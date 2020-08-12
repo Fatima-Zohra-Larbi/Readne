@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "999207830177",
+    "firebase_url": "https://readme-b0f89.firebaseio.com",
+    "project_id": "readme-b0f89",
+    "storage_bucket": "readme-b0f89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999207830177:android:1f0584c46792a2b24326e0",
+        "android_client_info": {
+          "package_name": "com.readme.reading"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999207830177-l1d307if21hb273lu1rqn0enf950ta00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6xpVAB2d5aQoe3MD_wewTOfSL8TIb1wo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999207830177-l1d307if21hb273lu1rqn0enf950ta00.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
