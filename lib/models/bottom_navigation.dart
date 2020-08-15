@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reading/screens/favoris.dart';
 
 class BottomNavigation extends StatelessWidget {
   final IconData icon;

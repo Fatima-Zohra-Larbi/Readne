@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +22,7 @@ class BookDetails extends StatefulWidget {
 class _BookDetailsState extends State<BookDetails> {
 Icon _favorite = new Icon(
   Icons.favorite,
-  color: Colors.red,
+  color: Colors.green,
 );
   Icon _notfavorite = new Icon(
   Icons.favorite_border,
@@ -32,13 +31,12 @@ Icon _favorite = new Icon(
   
   @override
   Widget build(BuildContext context) {
-      Color _iconColor = Colors.black;
 
 
 
        
         return Scaffold(
-          backgroundColor: Colors.brown[50],
+          backgroundColor: Color(0xffFCFFFD),
           appBar: Appbar(),
           
           
@@ -76,19 +74,13 @@ Icon _favorite = new Icon(
       label: Text('تحميل الكتاب', 
              style: TextStyle(color: Colors.black),),
       icon: Icon(Icons.cloud_download, color:Colors.green,), 
-       splashColor: Colors.brown[400],
-      color: Colors.brown[50]),
+       splashColor:  Color(0xffFCFFFD),
+      color:  Color(0xffFCFFFD)),
     
                              /************************/ //READ ONLINE BUTTON /********************** */
       RaisedButton.icon(
-      onPressed: () async { 
-          var result = await Firestore.instance
-          .collection("quotes")
-          .where("titre", isEqualTo: '${widget.book['titre']}')
-          .getDocuments();
-      result.documents.forEach((res) {
-        print(res.data['titre']);
-        });
+      onPressed: ()  { 
+     
       },
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Colors.black),
@@ -97,7 +89,7 @@ Icon _favorite = new Icon(
              style: TextStyle(color: Colors.black),),
       icon: Icon(Icons.open_in_new, color:Colors.black,), 
       splashColor: Colors.brown[400],
-      color: Colors.brown[50]),
+      color:  Color(0xffFCFFFD)),
           SizedBox(height:12),
     
     Row(

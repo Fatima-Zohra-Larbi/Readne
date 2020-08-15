@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reading/screens/add_books.dart';
+import 'package:reading/screens/home_author.dart';
 import 'package:reading/screens/page_type.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -100,8 +101,9 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
       ),
       ListTile(
         
-        title: Text('اقتباسات',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('المؤلفون',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         onTap: () {
+          Navigator.push(context,  MaterialPageRoute(builder: (context) => HomePage()));
 
         },
       ),

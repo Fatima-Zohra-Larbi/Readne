@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:reading/screens/favoris.dart';
-import 'package:reading/screens/quotes.dart';
 import 'package:reading/widgets/app_bar.dart';
 import 'package:reading/widgets/book_list.dart';
-import 'package:reading/models/bottom_navigation.dart';
 import 'package:reading/widgets/bottom_nav.dart';
 import 'package:reading/widgets/drawer.dart';
 
@@ -27,7 +24,7 @@ class _HomeState extends State<Home> {
 
                     drawer: DrawerWidget(),
 
-              backgroundColor: Colors.brown[50],
+              backgroundColor: Color(0xffFCFFFD),
               appBar:Appbar(),
               body:  Column(
                children: <Widget>[
@@ -46,7 +43,8 @@ class _HomeState extends State<Home> {
                ],
               
               ),
-              bottomNavigationBar: BottomNav(),
+              bottomNavigationBar: 
+              BottomNav(),
 
           ),
              
