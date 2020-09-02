@@ -23,7 +23,7 @@ Icon custIcon = Icon(Icons.search);
                 
                 backgroundColor: Colors.green,
                 elevation: 0.0,
-                actions: <Widget>[
+               /* actions: <Widget>[
                   IconButton( onPressed: (){
 setState(() {
   if( this.custIcon.icon == Icons.search){
@@ -70,7 +70,7 @@ prefixIcon: IconButton(icon: Icon(Icons.search,color: Colors.pink[400],),
 });
 
                   }, icon: custIcon)
-                ],
+                ],*/
               );
   }
 }

@@ -26,7 +26,7 @@ class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProvider
   }
   @override
   Widget build(BuildContext context) {
-    debugPrint('document id'+widget.choix['name']);
+   // debugPrint('document id'+widget.choix['name']);
                 return Scaffold(
                   
                   appBar: Appbar(),
@@ -74,10 +74,11 @@ class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProvider
                         fit: BoxFit.fill,
                     ),),),
                ),
-               Positioned(left: 150,
+               Positioned(left: 165,
                  top: 100,
         
-                 child:Text(widget.choix['name'],style: TextStyle(fontWeight: FontWeight.bold,fontSize:18),) ,
+                 child:Text(widget.choix['name'],style: TextStyle(fontWeight: FontWeight.bold,fontSize:20,                         fontFamily:'fatima',
+),) ,
        
        )
 
@@ -98,7 +99,7 @@ class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProvider
      ),
      
        new StreamBuilder( 
-        stream: Firestore.instance.collection('books').snapshots(),
+        stream: Firestore.instance.collection('books').where('author',isEqualTo:'${widget.choix['name']}').snapshots(),
         builder: (context, snapshot) {
         return OrientationBuilder(
   builder: (context, orientation) {
@@ -116,7 +117,7 @@ class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProvider
                 children: List.generate(snapshot.data.documents.length, (index) {
                   return Container(
                     
-                    padding: EdgeInsets.only(left: 8,right: 8),
+                                      padding: EdgeInsets.only(left: 8,right: 8,top:5),
                     child: InkResponse(
                       onTap: (){ Navigator.push(
                 context,

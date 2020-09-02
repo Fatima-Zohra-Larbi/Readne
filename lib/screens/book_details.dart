@@ -19,54 +19,86 @@ class BookDetails extends StatefulWidget {
 
 }
 
-class _BookDetailsState extends State<BookDetails> {
+class _BookDetailsState extends State<BookDetails> with SingleTickerProviderStateMixin {
+  TabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = new TabController(length: 2, vsync: this);
+  }
 Icon _favorite = new Icon(
   Icons.favorite,
-  color: Colors.green,
+  color: Colors.white,
 );
   Icon _notfavorite = new Icon(
   Icons.favorite_border,
-  color: Colors.black,
 );
-  
+
   @override
   Widget build(BuildContext context) {
 
 
 
        
-        return Scaffold(
-          backgroundColor: Color(0xffFCFFFD),
-          appBar: Appbar(),
-          
-          
-           body:SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-               children: <Widget>[
-                 SizedBox(height: 10,),
-                 Row(
-                   children: <Widget>[
-                    
-                         Container(
-           decoration: BoxDecoration(
-             borderRadius: BorderRadius.circular(40)
-           ),
-           child: Padding(padding: const EdgeInsets.all(4),
-                              child: Image.network(widget.book['image'],height: 200,width: 200,
-                            ),
-                         ),
-                         ),
-                     
-                    
-    
-            
-                     Column(
+       return Scaffold(
+                  
+                  appBar: Appbar(),
+                  body: ListView(
+
+                    children: <Widget>[
+                      Stack(
+                        children: <Widget>[
+                          Container(
+            height: 200,
+                          decoration: BoxDecoration(
+            color: Colors.green,
+              borderRadius: new BorderRadius.only(
+                                                bottomLeft:  const  Radius.circular(50.0),
+                                                bottomRight: const  Radius.circular(50.0),
+                          ),
+                           
+                
+                
+                          ),
+                          
+                          child:  Padding(
+                            padding: const EdgeInsets.only(top:170.0,left: 20),
+                            child: new TabBar(
+                              indicatorColor: Colors.transparent,
+                controller: _controller,
+            tabs: [
+              new Tab(
+                icon: const Icon(Icons.short_text),
+              ),
+              new Tab(
+                icon: const Icon(Icons.format_quote),
+              ),
+            ],
+          ),
+                          ),
+              ),
+               Padding(
+                 padding: const EdgeInsets.only(left:40),
+                 child: Container(
+                 width: 140,
+                 height: 165,
+              decoration: new BoxDecoration(
+ borderRadius: BorderRadius.circular(10),
+                   shape: BoxShape.rectangle,
+                    image: new DecorationImage(
+                        image: new NetworkImage(widget.book['image']),
+                        fit: BoxFit.fill,
+                    ),),),
+               ),
+               Positioned(left: 200, top: 1,
+        
+   child: Column(
                        children: <Widget>[
     
                              /************************/ //DOWNLOAD BOOK BUTTON /********************** */
                          RaisedButton.icon(
-      onPressed: () { },
+      onPressed: () { print('hello world');},
       shape: RoundedRectangleBorder(
             side: BorderSide(color: Colors.black),
     
@@ -80,7 +112,7 @@ Icon _favorite = new Icon(
                              /************************/ //READ ONLINE BUTTON /********************** */
       RaisedButton.icon(
       onPressed: ()  { 
-     
+     print('hello world');
       },
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Colors.black),
@@ -90,28 +122,36 @@ Icon _favorite = new Icon(
       icon: Icon(Icons.open_in_new, color:Colors.black,), 
       splashColor: Colors.brown[400],
       color:  Color(0xffFCFFFD)),
-          SizedBox(height:12),
+          SizedBox(height:10),
     
     Row(
       children: <Widget>[
                   /*********************/ //ADD TO FAVORITE /******************** */
-            IconButton(
-       icon : widget.book['favoris'] ? _favorite
-      : _notfavorite,
-    
-    onPressed: (){
-    
+             widget.book['favoris']
+                  ?  IconButton(icon:_favorite,onPressed: (){
+
+                    setState(() {
+  Firestore.instance.collection('books').document(widget.book.documentID).updateData({'favoris': false});  
+                              print('favorite'+widget.book['favoris'].toString());
+
+                      _favorite=_notfavorite;
+
+        });
+
+
+
+                  },)
+                  : IconButton(icon:_notfavorite,onPressed: (){
+
 setState(() {
-  if(widget.book['favoris'])
-    {_favorite = _notfavorite;} 
-     else 
-     {_notfavorite =_favorite;}
+      Firestore.instance.collection('books').document(widget.book.documentID).updateData({'favoris': true});  
+ _notfavorite=_favorite;
+       print('not favorite'+widget.book['favoris'].toString());
 
+                    //_iconColor = Colors.green;
 });
-           Firestore.instance.collection('books').document(widget.book.documentID).updateData({'favoris':!widget.book['favoris']}); 
 
-                  //if()
-    }),
+                  },),
     /****************************** */ // SHARE IN SOCIAL MEDIA /****************** */
      IconButton(
     
@@ -124,14 +164,29 @@ setState(() {
                    ],
                    
                  ),
-               ],
-             ),
-             SizedBox(height: 7,),
-             /************** */  //GOODREADS RATING /******************* */
-             Text('GoodReads Rating :${widget.book['rating']}',
+               
+                    
+       )
+
+       //change this as needed
+       
+                ],
+              ),
+      new Container(
+  height: 700,
+  child: new TabBarView(
+    controller: _controller,
+    children: <Widget>[
+      Column(
+        children: [
+           Padding(
+       padding: const EdgeInsets.fromLTRB(8, 20, 8,0),
+       child:  Text('GoodReads Rating :${widget.book['rating']}',
              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20
              ),),
-                RatingBarIndicator(
+
+     ),
+      RatingBarIndicator(
     rating: widget.book['rating'],
     itemBuilder: (context, index) => Icon(
            Icons.star,
@@ -143,7 +198,6 @@ setState(() {
     unratedColor: Colors.grey[300],
 
 ),
- /******************** */  // DESCRIPTION OF THE BOOK /****************** */
 Padding(
 padding: EdgeInsets.only(right:1),   
             child: Text('نبذة عن الكتاب', style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),
@@ -162,55 +216,61 @@ padding: EdgeInsets.only(right:1),
                   trimExpandedText: ' show less',
                   textAlign:TextAlign.right, ),
                ),
+        ],
+      ),
+    
 
-           /******************** */  // THE BOOK'S QUOTES LIST  //************** */ 
-      Padding(
-padding: EdgeInsets.only(right:1),   
-            child: Text('اقتباسات من الكتاب', style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),
-            textAlign:TextAlign.start)
-               ),
+     
+       new StreamBuilder( 
+        stream: Firestore.instance.collection('quotes').where('author',isEqualTo:'${widget.book['author']}').
+        where('titre',isEqualTo:'${widget.book['titre']}').snapshots(),
+        builder: (context, snapshot) {
+return   ListView.separated(
+  shrinkWrap: true,
+physics: NeverScrollableScrollPhysics(),
+    padding: const EdgeInsets.all(8),
+  
+    itemCount:snapshot.data.documents.length,
+  
+    itemBuilder: (BuildContext context, int index) {
+  
+      return ListTile(
+  
+        title: Text(snapshot.data.documents[index]['text'],textAlign: TextAlign.right,style: 
+  
+                      TextStyle(
+  
+                        fontSize: 18,
+  
+                       // fontWeight: FontWeight.w200,
+                         fontFamily:'fatima',
 
-             
-           
-               
+  
+                      )
+  
+                      ,),
+  
+      );
+  
+    },
+  
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
+  
+  
+  
+  
+);
 
- 
-   
-
-   // var result =  Firestore.instance
-     // .collection("quotes")
-     // .where("titre", isEqualTo: '${widget.book['titre']}')
-      //.getDocuments();
-  //result.documents.forEach((res) {
-    //print(res.data['titre']);
-    //});),
-
-
-/*
-       
-        /* Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            for ( var i in calledQuotes)
-            if(i.titre == widget.book['titre'])
-             Padding(
-               padding: const EdgeInsets.all(6.0),
-               child: Text(i.text ,textAlign: TextAlign.right, style: TextStyle(fontSize: 16,fontWeight: FontWeight.w300), ),
-             )
-
-            
-            
-          ],
-        ),*/
-      ),*/
-      //  child: Text('${book.rating}'),
-                
-                
-                
-           ],
-         ),
-       ),
-              bottomNavigationBar: BottomNav(),
+    
+        }
+    ),
+      
+    ],
+  ),
+),
+            ],
+          ),
+          bottomNavigationBar: BottomNav(),
     );
   }
 }

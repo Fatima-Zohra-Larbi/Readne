@@ -11,7 +11,7 @@ class BottomNavigation extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: <Widget>[
-                  IconButton(icon: Icon(icon,size: 27,),
+                  IconButton(icon: Icon(icon,size: 27,color:Colors.green,),
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => name));
                   

@@ -53,8 +53,38 @@ class PlanetRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Container(height: 2.0),
-          new Text(author['name'], style: headerTextStyle, ),
-          new Container(height: 8.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              new Text(author['name'], style: headerTextStyle, ),
+
+             //author['favoris']
+             author['favoris']
+                  ?  IconButton(icon:Icon(Icons.favorite,color: Colors.red),onPressed: (){
+                     
+                                        print(' favorite');
+
+                                Firestore.instance.collection('authors').document(author.documentID).updateData({'favoris': !author['favoris']});  
+
+                  },)
+                  : IconButton(icon:Icon(Icons.favorite_border),onPressed: (){
+                     
+                                        print('not favorite');
+
+                                Firestore.instance.collection('authors').document(author.documentID).updateData({'favoris': !author['favoris']});  
+
+                  },)
+                  
+                 /*  : IconButton(icon:Icon(Icons.favorite_border),onPressed: (){
+                    print('the document id is '+author.documentID);
+                                Firestore.instance.collection('author').document(author.documentID).updateData({'favoris': !author['favoris']});  
+
+                  },) */
+                   
+                   
+            ],
+          ),
+          new Container(height: 4.0),
           new Text(author['date'], style: subHeaderTextStyle),
         ],
       ),

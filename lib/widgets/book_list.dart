@@ -37,13 +37,14 @@ class _BookListState extends State<BookList> {
                   
                   padding: EdgeInsets.only(left: 8,right: 8),
                   child: InkResponse(
+                    //********** */ Go to page BookDetails **************//
                     onTap: (){ Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => BookDetails(book: snapshot.data.documents[index]),
-              ),);},
+                builder: (context) => BookDetails(book: snapshot.data.documents[index]),  ),);},
                                   child: GridTile(
-                      
+
+                        //************ Rating box ************** */
                       header:   Padding(
   padding: const EdgeInsets.only(right: 109),
   child:  Container(
@@ -66,7 +67,7 @@ child: Row(
 ),
   ),
 ),
-
+//****************** THE BOOK PICTURE IN GRID *************** */
                                     child: ClipRRect(
                                       child: Image.network (snapshot.data.documents[index]['image'] ,
                         fit: BoxFit.fill,

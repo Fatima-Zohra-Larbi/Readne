@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reading/models/bottom_navigation.dart';
+import 'package:reading/screens/fav_authors.dart';
 import 'package:reading/screens/favoris.dart';
 import 'package:reading/screens/quotes.dart';
 
@@ -16,7 +17,8 @@ class BottomNav extends StatelessWidget {
           children: <Widget>[
             BottomNavigation( Icons.favorite,Favoris()),
             BottomNavigation(Icons.format_quote,Quotes()),
-              BottomNavigation(Icons.file_download,Quotes()),
+            BottomNavigation(Icons.person_pin,FavAuthors()),
+            BottomNavigation(Icons.file_download,Quotes()),
               
           ],
         ),

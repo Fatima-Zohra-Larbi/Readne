@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:reading/screens/add_books.dart';
 import 'package:reading/screens/home_author.dart';
 import 'package:reading/screens/page_type.dart';
+import 'package:reading/widgets/new_books.dart';
 
 class DrawerWidget extends StatefulWidget {
   @override
@@ -111,6 +112,14 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         title: Text('Add books',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         onTap: () {
           Navigator.push(context,  MaterialPageRoute(builder: (context) => AddBooks()));
+          // Update the state of the app.
+          // ...
+        },
+      ),
+       ListTile(
+        title: Text('test',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        onTap: () {
+          Navigator.push(context,  MaterialPageRoute(builder: (context) => NewBooks()));
           // Update the state of the app.
           // ...
         },
