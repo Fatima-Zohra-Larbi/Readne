@@ -1,44 +1,78 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:reading/widgets/app_bar.dart';
-import 'package:reading/widgets/author_row.dart';
-class FavAuthors extends StatelessWidget {
+import 'package:reading/widgets/bottom_nav.dart';
+import 'package:reading/widgets/fav.author_row.dart';
+
+class FavAuthors extends StatefulWidget {
+  @override
+  _FavAuthorsState createState() => _FavAuthorsState();
+}
+
+class _FavAuthorsState extends State<FavAuthors> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     
-     body: new Column(
+    return new Scaffold(
+      appBar: Appbar(),
+      body: new Column(
         children: <Widget>[
-          new Appbar(),
-     
-     Expanded(
-      child: StreamBuilder(
-        stream:      Firestore.instance.collection('authors').where('favoris',isEqualTo: true).snapshots(),
-
-        builder: (context, snapshot) {
-          return new Container(
-            color: Color(0xffFCFFFD),
-            child: new CustomScrollView(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: false,
-              slivers: <Widget>[
-                new SliverPadding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  sliver: new SliverList(
-                    delegate: new SliverChildBuilderDelegate(
-                        (context, index) => new PlanetRow(author:snapshot.data.documents[index]),
-                      childCount: snapshot.data.documents.length,
+           Container(
+            height: 70.0,
+            color:  Color(0xffFCFFFD),
+            child: Stack(
+              children: <Widget>[
+                
+                Positioned(
+                  top: 8.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          border: Border.all(
+                              color: Colors.green.withOpacity(0.5), width: 1.0),
+                          color: Colors.white10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: "ادخل اسم المؤلف ", 
+                                focusedBorder: UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.transparent),
+  ),
+  enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white60),
+        borderRadius: BorderRadius.circular(25.7),
+      ),
+  ),
+                              textAlign: TextAlign.center,
+                            
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.search,
+                              color: Colors.green,
+                            ),
+                            onPressed: () {
+                              print("your menu action here");
+                            },
+                          ),
+                         
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                )
               ],
             ),
-          );
-        }
-      ),
-    ),
+          ),
+          new FavAuthorRow(),
         ],
-     ),
+      ),
+      bottomNavigationBar: BottomNav(),
     );
   }
 }

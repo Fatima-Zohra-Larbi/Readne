@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:reading/screens/search_result.dart';
  
 class Appbar extends StatefulWidget implements PreferredSizeWidget{
+  
     Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
@@ -13,15 +14,20 @@ class _AppbarState extends State<Appbar> {
   final search =TextEditingController();
 Icon custIcon = Icon(Icons.search);
 
-  Widget textBar = Text("Readme" );
   @override
   Widget build(BuildContext context) {
     return AppBar(
-                      iconTheme: new IconThemeData(color: Colors.white),
+      bottom: PreferredSize(
+      child: Container(
+         color: Colors.grey[200],
+         height: 2.0,
+      ),
+      preferredSize: Size.fromHeight(4.0)),
+                      iconTheme: new IconThemeData(color: Colors.black),
 
-                title: textBar,
+                title: Text('Readme' ,style: TextStyle(color: Colors.black,fontFamily: 'fatima'),),
                 
-                backgroundColor: Colors.green,
+                backgroundColor: Color(0xffFAFAFA),
                 elevation: 0.0,
                /* actions: <Widget>[
                   IconButton( onPressed: (){

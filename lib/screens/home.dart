@@ -24,35 +24,39 @@ class _HomeState extends State<Home> {
   resizeToAvoidBottomInset: false, // set it to false
 
                     drawer: DrawerWidget(),
+                    backgroundColor:Colors.white,
 
-              backgroundColor: Color(0xffFCFFFD),
+              //backgroundColor: Color(0xffFCFFFD),
               appBar:Appbar(),
               body:  Column(
                children: <Widget>[
               Container(
-            height: 70.0,
+            height: 55.0,
             color:  Color(0xffFCFFFD),
             child: Stack(
               children: <Widget>[
                 
                 Positioned(
-                  top: 8.0,
+                  top: 3.0,
                   left: 0.0,
                   right: 0.0,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: EdgeInsets.symmetric(horizontal: 30.0),
                     child: DecoratedBox(
+                      
                       decoration: BoxDecoration(
+                        
                           borderRadius: BorderRadius.circular(8.0),
                           border: Border.all(
-                              color: Colors.green.withOpacity(0.5), width: 1.0),
-                          color: Colors.white10),
+                              color: Colors.grey.withOpacity(0.5), width: 0.0),
+                          color: Colors.grey[100]),
                       child: Row(
                         children: [
                           Expanded(
+                            
                             child: TextField(
                               decoration: InputDecoration(
-                                hintText: "ادخل اسم الكتاب ", 
+                                hintText: " ادخل اسم الكتاب المراد البحث عنه", 
                                 focusedBorder: UnderlineInputBorder(
     borderSide: BorderSide(color: Colors.transparent),
   ),
@@ -61,7 +65,7 @@ class _HomeState extends State<Home> {
         borderRadius: BorderRadius.circular(25.7),
       ),
   ),
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.right,
                             
                             ),
                           ),
@@ -83,13 +87,26 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-               Text('جديد الكتب',
-               style: TextStyle(fontWeight: FontWeight.bold,color: Colors.grey[800],fontSize: 25,),
-               textAlign: TextAlign.right,
-               ),
-                         Expanded(child:Container(child: NewBooks()),),
-
-               SizedBox(height: 5),
+              
+                  Row(
+                   mainAxisAlignment: MainAxisAlignment.end,
+                   children: [
+                     
+                        Text('جديد الكتب',
+                       style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 21,fontFamily: 'fatima'),),
+                      Image.asset('assets/new.png', width:40, height:50,),      
+                                   ],
+                 ),
+               
+               
+                         Expanded(child:Container(  child: NewBooks()),),
+Padding(
+                 padding: const EdgeInsets.only(left:245),
+                 child: Text('متوفر في المكتبة',
+                 style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 20,fontFamily: 'fatima'),
+              
+                 ),
+               ), 
                   Expanded(
                 child:  Container(child: BookList()),
                   ),

@@ -43,7 +43,13 @@ Icon _favorite = new Icon(
        
        return Scaffold(
                   
-                  appBar: Appbar(),
+                  appBar: AppBar(
+                     iconTheme: new IconThemeData(color: Colors.black),
+                title: Text('Readme' ,style: TextStyle(color: Colors.black,fontFamily: 'fatima'),),
+                backgroundColor: Colors.green,
+                elevation: 0,
+
+                  ),
                   body: ListView(
 
                     children: <Widget>[
@@ -55,7 +61,6 @@ Icon _favorite = new Icon(
             color: Colors.green,
               borderRadius: new BorderRadius.only(
                                                 bottomLeft:  const  Radius.circular(50.0),
-                                                bottomRight: const  Radius.circular(50.0),
                           ),
                            
                 
@@ -214,8 +219,10 @@ padding: EdgeInsets.only(right:1),
                   trimMode: TrimMode.Line,
                   trimCollapsedText: '...Show more',
                   trimExpandedText: ' show less',
-                  textAlign:TextAlign.right, ),
+                  textAlign:TextAlign.right,
+                   ),
                ),
+              
         ],
       ),
     

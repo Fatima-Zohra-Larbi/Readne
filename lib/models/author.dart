@@ -1,4 +1,4 @@
-class Author {
+/* class Author {
 final String name;
 final String description;
 final String image;
@@ -37,4 +37,9 @@ List<Author> authors = [
     description: "54.6m Km",
     image: "assets/livre2.jpg",
   ),
-];
+]; */
+
+class Modal{
+  String link,name;
+  Modal(this.link,this.name);
+}

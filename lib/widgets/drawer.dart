@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:reading/models/test.dart';
 import 'package:reading/screens/add_books.dart';
 import 'package:reading/screens/home_author.dart';
 import 'package:reading/screens/page_type.dart';
-import 'package:reading/widgets/new_books.dart';
+import 'package:reading/screens/quotes.dart';
 
 class DrawerWidget extends StatefulWidget {
   @override
@@ -18,18 +19,17 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     // Important: Remove any padding from the ListView.
     padding: EdgeInsets.zero,
     children: <Widget>[
-     UserAccountsDrawerHeader(
-       decoration: BoxDecoration(
-         color: Colors.black,
-       ),
-  accountName: Text("Larbi Fatima Zohra"),
-  accountEmail: Text("larbifatima@gmail.com"),
-  currentAccountPicture: CircleAvatar(
-backgroundImage: AssetImage('assets/popular.jpg'),  ),
-),
-Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey[600]),),
-      ListTile(
-        title: Text('روايات عربية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+     SizedBox(height: 10,),
+ListTile(
+  
+   trailing:
+         Icon (Icons.library_books,color: Colors.green,
+           
+        ),
+        title: Text('تصنيفات الكتب',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+      ),    
+        ListTile(
+        title: Text('روايات عربية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.w100),),
         onTap: () {
             Stream one= Firestore.instance.collection('books').where('type', isEqualTo: 'روايات عربية').snapshots();
 
@@ -38,7 +38,7 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
       ListTile(
-        title: Text('روايات مترجمة',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('روايات مترجمة',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.w100),),
         onTap: () {
                       Stream one= Firestore.instance.collection('books').where('type', isEqualTo: 'روايات مترجمة').snapshots();
 
@@ -47,7 +47,7 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
       ListTile(
-        title: Text('كتب تاريخية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('كتب تاريخية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.w100),),
         onTap: () {
                       Stream one= Firestore.instance.collection('books').where('type', isEqualTo: 'تاريخي').snapshots();
 
@@ -56,7 +56,7 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
       ListTile(
-        title: Text('كتب علمية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('كتب علمية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.w100),),
         onTap: () {
                                 Stream one= Firestore.instance.collection('books').where('type', isEqualTo: 'علمي').snapshots();
 
@@ -65,7 +65,7 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
       ListTile(
-        title: Text('كتب فلسفية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('كتب فلسفية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.w100),),
         onTap: () {
                                 Stream one= Firestore.instance.collection('books').where('type', isEqualTo: 'فلسفي').snapshots();
 
@@ -74,7 +74,7 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
       ListTile(
-        title: Text('كتب تطوير الذات',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('كتب تطوير الذات',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.w100),),
         onTap: () {
                                 Stream one= Firestore.instance.collection('books').where('type', isEqualTo: 'تطوير الذات').snapshots();
 
@@ -83,7 +83,7 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
       ListTile(
-        title: Text('كتب دينية ',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('كتب دينية ',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.w100),),
         onTap: () {
                                 Stream one= Firestore.instance.collection('books').where('type', isEqualTo: 'ديني').snapshots();
 
@@ -92,7 +92,7 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
       ListTile(
-        title: Text('دواوين شعرية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('دواوين شعرية',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.w100),),
         onTap: () {
                                 Stream one= Firestore.instance.collection('books').where('type', isEqualTo: 'شعر').snapshots();
 
@@ -101,8 +101,23 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
       ListTile(
-        
-        title: Text('المؤلفون',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+         trailing:
+         Icon (Icons.format_quote,color: Colors.green,
+           
+        ),
+        title: Text('اقتباسات',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        onTap: () {
+          Navigator.push(context,  MaterialPageRoute(builder: (context) => Quotes()));
+          // Update the state of the app.
+          // ...
+        },
+      ),
+      ListTile(
+         trailing:
+         Icon (Icons.person,color: Colors.green,
+           
+        ),
+        title: Text('مؤلفون',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         onTap: () {
           Navigator.push(context,  MaterialPageRoute(builder: (context) => HomePage()));
 
@@ -117,13 +132,14 @@ Text('تصنيفات الكتب',textAlign:TextAlign.center ,style:TextStyle(fon
         },
       ),
        ListTile(
-        title: Text('test',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+        title: Text('pdf',textAlign:TextAlign.right ,style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
         onTap: () {
-          Navigator.push(context,  MaterialPageRoute(builder: (context) => NewBooks()));
+        //  Navigator.push(context,  MaterialPageRoute(builder: (context) => MyApp()));
           // Update the state of the app.
           // ...
         },
       ),
+       
     ],
      ),
     );

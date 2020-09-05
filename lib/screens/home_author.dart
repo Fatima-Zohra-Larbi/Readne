@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:reading/screens/authors.dart';
 import 'package:reading/widgets/app_bar.dart';
+import 'package:reading/widgets/bottom_nav.dart';
 
 class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: Appbar(),
       body: new Column(
         children: <Widget>[
-          new Appbar(),
            Container(
             height: 70.0,
             color:  Color(0xffFCFFFD),
@@ -67,6 +68,8 @@ class HomePage extends StatelessWidget {
           new HomePageBody(),
         ],
       ),
+            bottomNavigationBar: BottomNav(),
+
     );
   }
 }

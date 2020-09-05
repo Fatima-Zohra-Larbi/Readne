@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reading/widgets/app_bar.dart';
+import 'package:reading/widgets/bottom_nav.dart';
 
 import 'book_details.dart';
 
@@ -95,6 +96,8 @@ child: Row(
                         );
         }
     ),
-      )   );
+      )  ,
+      bottomNavigationBar: BottomNav(),
+       );
   }
 }
