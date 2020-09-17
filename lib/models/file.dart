@@ -17,6 +17,7 @@ class FullPdfViewerScreen extends StatelessWidget {
 
 import 'package:flutter/material.dart';
 import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ViewPdf extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _ViewPdfState extends State<ViewPdf> {
   @override
   Widget build(BuildContext context) {
     //get data from first class
-    String data;
+    String data= ModalRoute.of(context).settings.arguments;
     ViewNow() async {
       doc = await PDFDocument.fromURL(
           data);
@@ -40,13 +41,22 @@ class _ViewPdfState extends State<ViewPdf> {
     Widget Loading(){
       ViewNow();
       if(doc==null){
+        return SpinKitCircle(
+  color: Colors.green,
+  size: 50.0,
+);
         //return
       }
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text("Retrieve Pdf"),
+      bottom: PreferredSize(
+      child: Container(
+         color: Colors.grey[200],
+         height: 2.0,
+      ),
+      ),
+        title: Text("Readme"),
       ),
       body: doc==null?Loading():PDFViewer(document: doc),
     );

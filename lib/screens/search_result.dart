@@ -39,7 +39,7 @@ class _SearchResultState extends State<SearchResult> {
               children: List.generate(snapshot.data.documents.length, (index) {
                 return Container(
 
-                  padding: EdgeInsets.only(left: 8,right: 8),
+                  padding: EdgeInsets.only(left: 8,right: 8,top: 8),
                   child: InkResponse(
                     onTap: (){ Navigator.push(
               context,

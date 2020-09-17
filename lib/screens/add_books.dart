@@ -1,4 +1,13 @@
+
+
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+import 'package:file_picker/file_picker.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reading/widgets/app_bar.dart';
@@ -9,10 +18,14 @@ class AddBooks extends StatefulWidget {
 }
 
 class _AddBooksState extends State<AddBooks> {
+final filenom= TextEditingController();
+final fileauthor= TextEditingController();
+
     final _formKey = GlobalKey<FormState>();
     List<String> _colors = <String>['', 'تاريخي', 'شعر', 'فلسفي','روايات عربية', 'علمي', 'ديني', 'تطوير الذات','روايات مترجمة'];
   String title, author,description,image,type;
   double rating; 
+    final mainReference = FirebaseDatabase.instance.reference().child('Database');
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +38,8 @@ class _AddBooksState extends State<AddBooks> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 children: <Widget>[
                   new TextFormField(
+                    controller: filenom,
+
                     decoration: const InputDecoration(
                       icon: const Icon(Icons.title),
                       hintText: 'Enter the book title',
@@ -36,6 +51,7 @@ class _AddBooksState extends State<AddBooks> {
                         }
                   ),
                   new TextFormField(
+                    controller: fileauthor,
                     decoration: const InputDecoration(
                       icon: const Icon(Icons.person_outline),
                       hintText: 'Enter the author name',
@@ -131,8 +147,48 @@ class _AddBooksState extends State<AddBooks> {
                         },
                       )),
                 ],
-              ))
+              )),
+              floatingActionButton: FloatingActionButton(
+        onPressed: () {
+getPdfAndUpload();
+        },
+        child: Icon(Icons.add,color: Colors.white,),
+        backgroundColor: Colors.red,
+      ),
     );
 
   }
+  Future getPdfAndUpload()async{
+    
+    File file;
+    file = await FilePicker.getFile(type: FileType.custom);
+    String fileName = '${filenom.text}.pdf';
+    //function call
+    savePdf(file.readAsBytesSync(), fileName);
+  }
+  savePdf(List<int> asset, String name) async {
+    StorageReference reference = FirebaseStorage.instance.ref().child(name);
+    StorageUploadTask uploadTask = reference.putData(asset);
+    String url = await (await uploadTask.onComplete).ref.getDownloadURL();
+    //function call
+    documentFileUpload(url);
+  }
+  String CreateCryptoRandomString([int length = 32]) {
+    final Random _random=Random.secure();
+    var values = List<int>.generate(length, (i) => _random.nextInt(256));
+    return base64Url.encode(values);
+    //generate key
+  }
+  void documentFileUpload(String str) {
+    var data = {
+      "PDF":str,
+      "FileName":filenom.text,
+      "Author": fileauthor.text,
+      //store data
+    };
+    mainReference.child(CreateCryptoRandomString()).set(data).then((v) {
+      print("Store Successfully");
+    });
+  }
 }
+ 

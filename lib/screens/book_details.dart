@@ -1,9 +1,12 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:reading/widgets/app_bar.dart';
+import 'package:reading/models/author.dart';
+import 'package:reading/models/file.dart';
 import 'package:reading/widgets/bottom_nav.dart';
 import 'package:readmore/readmore.dart';
 
@@ -21,11 +24,25 @@ class BookDetails extends StatefulWidget {
 
 class _BookDetailsState extends State<BookDetails> with SingleTickerProviderStateMixin {
   TabController _controller;
-
+List<Modal> itemList=List();
+  final mainReference = FirebaseDatabase.instance.reference().child('Database');
   @override
   void initState() {
     super.initState();
     _controller = new TabController(length: 2, vsync: this);
+    mainReference.once().then((DataSnapshot snap){
+      var data=snap.value;
+      itemList.clear();
+      data.forEach((key,value){
+Modal m=new Modal(value['PDF'],value['FileName'],value['Author']);
+itemList.add(m);
+      });
+      setState(() {
+        print('value is');
+        print(itemList.length);
+      });
+     //get data from firebase
+    });
   }
 Icon _favorite = new Icon(
   Icons.favorite,
@@ -103,7 +120,11 @@ Icon _favorite = new Icon(
     
                              /************************/ //DOWNLOAD BOOK BUTTON /********************** */
                          RaisedButton.icon(
-      onPressed: () { print('hello world');},
+      onPressed: () {
+        
+        
+        
+        },
       shape: RoundedRectangleBorder(
             side: BorderSide(color: Colors.black),
     
@@ -117,8 +138,31 @@ Icon _favorite = new Icon(
                              /************************/ //READ ONLINE BUTTON /********************** */
       RaisedButton.icon(
       onPressed: ()  { 
-     print('hello world');
-      },
+                for(int index=0;index< itemList.length;index++){
+                  print(itemList[index].name);
+                  print(itemList[index].author);
+                 print(widget.book['titre']);
+                                  print(widget.book['author']);
+
+
+
+                if(widget.book['author']  == itemList[index].author && widget.book['titre']  == itemList[index].name)
+               
+{
+  print("true");
+String passData =itemList[index].link;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context)=>ViewPdf(),
+                                settings: RouteSettings(
+                                  arguments: passData,
+                                )
+                            )
+                        );     
+                         }
+                         }
+                         },
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Colors.black),
              borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -247,10 +291,9 @@ physics: NeverScrollableScrollPhysics(),
   
                       TextStyle(
   
-                        fontSize: 18,
+                        fontSize: 16,
   
                        // fontWeight: FontWeight.w200,
-                         fontFamily:'fatima',
 
   
                       )

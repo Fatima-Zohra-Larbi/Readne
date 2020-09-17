@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:reading/screens/search_result.dart';
 import 'package:reading/widgets/app_bar.dart';
 import 'package:reading/widgets/book_list.dart';
 import 'package:reading/widgets/bottom_nav.dart';
@@ -12,7 +14,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
- 
+   final search = TextEditingController();
+
   @override
 
   Widget build(BuildContext context) {
@@ -55,6 +58,7 @@ class _HomeState extends State<Home> {
                           Expanded(
                             
                             child: TextField(
+                              controller: search,
                               decoration: InputDecoration(
                                 hintText: " ادخل اسم الكتاب المراد البحث عنه", 
                                 focusedBorder: UnderlineInputBorder(
@@ -66,7 +70,6 @@ class _HomeState extends State<Home> {
       ),
   ),
                               textAlign: TextAlign.right,
-                            
                             ),
                           ),
                           IconButton(
@@ -75,7 +78,12 @@ class _HomeState extends State<Home> {
                               color: Colors.green,
                             ),
                             onPressed: () {
-                              print("your menu action here");
+Stream one= Firestore.instance.collection('books').where('titre', isGreaterThanOrEqualTo: search.text  ).snapshots();
+
+                            Navigator.push(context,  MaterialPageRoute(builder: (context) => SearchResult( querySnapshot:one)));
+                                                          search.clear();
+                                                        
+
                             },
                           ),
                          
@@ -99,7 +107,9 @@ class _HomeState extends State<Home> {
                  ),
                
                
-                         Expanded(child:Container(  child: NewBooks()),),
+                         Expanded(
+                           child:Container(  child: NewBooks()),),
+                           
 Padding(
                  padding: const EdgeInsets.only(left:245),
                  child: Text('متوفر في المكتبة',

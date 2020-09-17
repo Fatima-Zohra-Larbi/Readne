@@ -18,13 +18,7 @@ class AuthorDetails extends StatefulWidget {
 }
 
 class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProviderStateMixin {
-  TabController _controller;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = new TabController(length: 2, vsync: this);
-  }
   @override
   Widget build(BuildContext context) {
    // debugPrint('document id'+widget.choix['name']);
@@ -53,21 +47,7 @@ class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProvider
                 
                           ),
                           
-                       /*   child:  Padding(
-                            padding: const EdgeInsets.only(top:120.0,left: 40),
-                            child: new TabBar(
-                              indicatorColor: Colors.transparent,
-                controller: _controller,
-            tabs: [
-              new Tab(
-                icon: const Icon(Icons.description),
-              ),
-              new Tab(
-                icon: const Icon(Icons.collections_bookmark),
-              ),
-            ],
-          ),
-                          ),*/
+                     
               ),
                Padding(
                  padding: const EdgeInsets.only(left:155),
@@ -104,7 +84,7 @@ class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProvider
      style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),),
    ),
         Padding(
-             padding: const EdgeInsets.fromLTRB(8,0, 8,0),
+             padding: const EdgeInsets.only(left:20,right: 8),
              child: Container(
                child: ReadMoreText(widget.choix['description'],
                style: TextStyle(fontSize: 16,fontWeight: FontWeight.w200),

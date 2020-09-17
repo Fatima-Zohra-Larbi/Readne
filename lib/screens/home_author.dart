@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reading/screens/authors.dart';
+import 'package:reading/screens/search_author.dart';
 import 'package:reading/widgets/app_bar.dart';
 import 'package:reading/widgets/bottom_nav.dart';
 
@@ -7,6 +8,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+       final search = TextEditingController();
+
     return new Scaffold(
       appBar: Appbar(),
       body: new Column(
@@ -27,14 +30,16 @@ class HomePage extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           border: Border.all(
-                              color: Colors.green.withOpacity(0.5), width: 1.0),
-                          color: Colors.white10),
+                               color: Colors.grey.withOpacity(0.5), width: 0.0),
+                          color: Colors.grey[100]),
                       child: Row(
                         children: [
                           Expanded(
                             child: TextField(
+                                                            controller: search,
+
                               decoration: InputDecoration(
-                                hintText: "ادخل اسم المؤلف ", 
+                                hintText: " ادخل اسم المؤلف المراد البحث عنه ", 
                                 focusedBorder: UnderlineInputBorder(
     borderSide: BorderSide(color: Colors.transparent),
   ),
@@ -43,7 +48,7 @@ class HomePage extends StatelessWidget {
         borderRadius: BorderRadius.circular(25.7),
       ),
   ),
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.right,
                             
                             ),
                           ),
@@ -53,7 +58,10 @@ class HomePage extends StatelessWidget {
                               color: Colors.green,
                             ),
                             onPressed: () {
-                              print("your menu action here");
+
+      Navigator.push(context,  MaterialPageRoute(builder: (context) => SearchAuthor(choix: search.text )));
+      search.clear();
+
                             },
                           ),
                          

@@ -3,7 +3,6 @@ import 'package:reading/models/bottom_navigation.dart';
 import 'package:reading/screens/fav_authors.dart';
 import 'package:reading/screens/fav_quotes.dart';
 import 'package:reading/screens/favoris.dart';
-import 'package:reading/screens/quote_tile.dart';
 import 'package:reading/screens/quotes.dart';
 
 class BottomNav extends StatelessWidget {
