@@ -137,7 +137,7 @@ Icon _favorite = new Icon(
     
                              /************************/ //READ ONLINE BUTTON /********************** */
       RaisedButton.icon(
-      onPressed: ()  { 
+      onPressed: () async  { 
                 for(int index=0;index< itemList.length;index++){
                   print(itemList[index].name);
                   print(itemList[index].author);
@@ -149,7 +149,8 @@ Icon _favorite = new Icon(
                 if(widget.book['author']  == itemList[index].author && widget.book['titre']  == itemList[index].name)
                
 {
-  print("true");
+  print("you access to the document");
+
 String passData =itemList[index].link;
                         Navigator.push(
                             context,
@@ -159,8 +160,11 @@ String passData =itemList[index].link;
                                   arguments: passData,
                                 )
                             )
-                        );     
+                        );  
+                                                     break;
+   
                          }
+
                          }
                          },
       shape: RoundedRectangleBorder(
@@ -239,17 +243,17 @@ setState(() {
     rating: widget.book['rating'],
     itemBuilder: (context, index) => Icon(
            Icons.star,
-           color: Colors.red[300],
+           color: Colors.amber[500],
     ),
     itemCount: 5,
-    itemSize: 30.0,
+    itemSize: 20.0,
     direction: Axis.horizontal,
     unratedColor: Colors.grey[300],
 
 ),
 Padding(
-padding: EdgeInsets.only(right:1),   
-            child: Text('نبذة عن الكتاب', style: TextStyle(fontSize: 23,fontWeight: FontWeight.bold),
+padding: EdgeInsets.only(left:230),   
+            child: Text('نبذة عن الكتاب', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
             textAlign:TextAlign.start)
                ),
                Padding(

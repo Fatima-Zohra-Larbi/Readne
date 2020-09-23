@@ -50,12 +50,7 @@ class _ViewPdfState extends State<ViewPdf> {
     }
     return Scaffold(
       appBar: AppBar(
-      bottom: PreferredSize(
-      child: Container(
-         color: Colors.grey[200],
-         height: 2.0,
-      ),
-      ),
+     
         title: Text("Readme"),
       ),
       body: doc==null?Loading():PDFViewer(document: doc),

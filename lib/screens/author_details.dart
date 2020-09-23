@@ -36,7 +36,7 @@ class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProvider
                       Stack(
                         children: <Widget>[
                           Container(
-            height: 140,
+            height: MediaQuery.of(context).size.height*0.23,
                           decoration: BoxDecoration(
             color: Colors.green,
               borderRadius: new BorderRadius.only(
@@ -52,8 +52,8 @@ class _AuthorDetailsState extends State<AuthorDetails> with SingleTickerProvider
                Padding(
                  padding: const EdgeInsets.only(left:155),
                  child: Container(
-                 width: 100,
-                 height: 100,
+                 width: MediaQuery.of(context).size.height*0.15,
+                 height: MediaQuery.of(context).size.height*0.15,
               decoration: new BoxDecoration(
                   shape: BoxShape.circle,
                     image: new DecorationImage(
