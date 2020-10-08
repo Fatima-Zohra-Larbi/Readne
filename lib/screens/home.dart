@@ -21,8 +21,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     
     return  SafeArea(
-                          child:
-           Scaffold(
+                          child:Scaffold(
 
   resizeToAvoidBottomInset: false, // set it to false
 
@@ -78,7 +77,7 @@ class _HomeState extends State<Home> {
                               color: Colors.green,
                             ),
                             onPressed: () {
-Stream one= Firestore.instance.collection('books').where('titre', isGreaterThanOrEqualTo: search.text  ).snapshots();
+Stream one= Firestore.instance.collection('books').where('titre',isEqualTo: search.text  ).snapshots();
 
                             Navigator.push(context,  MaterialPageRoute(builder: (context) => SearchResult( querySnapshot:one)));
                                                           search.clear();

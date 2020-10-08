@@ -61,6 +61,7 @@ class _FavAuthorsState extends State<FavAuthors> {
                               color: Colors.green,
                             ),
                             onPressed: () {
+                              print(search.text);
 Navigator.push(context,  MaterialPageRoute(builder: (context) => SearchAuthor(choix: search.text )));
       search.clear();                            },
                           ),

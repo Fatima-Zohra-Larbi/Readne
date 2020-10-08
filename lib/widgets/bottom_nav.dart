@@ -3,7 +3,6 @@ import 'package:reading/models/bottom_navigation.dart';
 import 'package:reading/screens/fav_authors.dart';
 import 'package:reading/screens/fav_quotes.dart';
 import 'package:reading/screens/favoris.dart';
-import 'package:reading/screens/quotes.dart';
 
 class BottomNav extends StatelessWidget {
   @override
@@ -19,7 +18,6 @@ class BottomNav extends StatelessWidget {
             BottomNavigation( Icons.favorite_border,Favoris()),
             BottomNavigation(Icons.format_quote,FavQuotes()),
             BottomNavigation(Icons.person_pin,FavAuthors()),
-            BottomNavigation(Icons.file_download,Quotes()),
               
           ],
         ),

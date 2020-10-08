@@ -119,10 +119,8 @@ Icon _favorite = new Icon(
                        children: <Widget>[
     
                              /************************/ //DOWNLOAD BOOK BUTTON /********************** */
-                         RaisedButton.icon(
+                         /* RaisedButton.icon(
       onPressed: () {
-        
-        
         
         },
       shape: RoundedRectangleBorder(
@@ -133,7 +131,7 @@ Icon _favorite = new Icon(
              style: TextStyle(color: Colors.black),),
       icon: Icon(Icons.cloud_download, color:Colors.green,), 
        splashColor:  Color(0xffFCFFFD),
-      color:  Color(0xffFCFFFD)),
+      color:  Color(0xffFCFFFD)), */
     
                              /************************/ //READ ONLINE BUTTON /********************** */
       RaisedButton.icon(
@@ -146,7 +144,7 @@ Icon _favorite = new Icon(
 
 
 
-                if(widget.book['author']  == itemList[index].author && widget.book['titre']  == itemList[index].name)
+                if( widget.book['titre']  == itemList[index].name)
                
 {
   print("you access to the document");
@@ -206,11 +204,11 @@ setState(() {
 
                   },),
     /****************************** */ // SHARE IN SOCIAL MEDIA /****************** */
-     IconButton(
+    /*  IconButton(
     
       icon: Icon(Icons.share,color: Colors.black,), 
     
-    onPressed: (){}),
+    onPressed: (){}), */
   ],
 ),
   
@@ -327,4 +325,15 @@ physics: NeverScrollableScrollPhysics(),
           bottomNavigationBar: BottomNav(),
     );
   }
+}
+
+
+Future<String> uploadImage(var imageFile ) async {
+    StorageReference ref = FirebaseStorage.instance.ref().child("/photo.jpg");
+    StorageUploadTask uploadTask = ref.putFile(imageFile);
+
+    var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
+    var url = dowurl.toString();
+
+    return url; 
 }

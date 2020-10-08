@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:reading/widgets/author_row.dart';
-import 'package:reading/widgets/bottom_nav.dart';
-import 'package:readmore/readmore.dart';
 
-import 'book_details.dart';
 
 class SearchAuthor extends StatefulWidget {
          final String choix;
@@ -29,8 +25,7 @@ class _SearchAuthorState extends State<SearchAuthor> {
 
                   ),
                   body: StreamBuilder(
-                    stream:   Firestore.instance.collection('authors').where('name',isGreaterThanOrEqualTo: widget.choix).snapshots(),
-
+                    stream:   Firestore.instance.collection('authors').where('name',isEqualTo: widget.choix.toString()).snapshots(),
                     builder: (context, snapshot) {
           return new Container(
             color: Color(0xffFCFFFD),
